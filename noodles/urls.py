@@ -1,7 +1,7 @@
 """
 Noodles URLs
 """
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.conf import settings
 from django.views.generic import RedirectView
 from noodles.views import contact, contact_thanks

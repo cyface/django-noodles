@@ -11,8 +11,6 @@ from django.test import TestCase
 from django.conf import settings
 from django.test.utils import override_settings
 from django.test.client import Client
-from django.db import connection
-
 from noodles.templatetags.noodles_tags import insidenav
 from noodles.models import SiteMeta, ContactSubmission
 from noodles import context_processors
@@ -26,8 +24,7 @@ from noodles_tests.models import (
 
 from noodles import util
 from noodles.util import AssetsFromImageHandler, has_changed
-from noodles_tests.util import FakeRequest, write_to_file
-
+from noodles_tests.util import FakeRequest
 
 this_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -200,6 +197,7 @@ class AssetFromImageTestCase(TestCase):
     """
     Tests relating to converting an image into assets
     """
+
     def setUp(self):
         """
         Set some initial things up
@@ -312,6 +310,7 @@ class EmailTestCase(TestCase):
     """
     Tests relating to email list mechanisms
     """
+
     def test_email_send_to_list_default(self):
         """
         Test empty ADMINS list and empty NOODLES_EMAIL_LIST
@@ -348,6 +347,7 @@ class ContextProcessorTestCase(TestCase):
     """
     Tests for context processors
     """
+
     def test_static_paths(self):
         """
         Test static paths context processor
@@ -376,7 +376,21 @@ class ContextProcessorTestCase(TestCase):
         self.assertEquals(context_processors.site("fake_request")["SITE_NAME"], "example.com")
         self.assertEquals(context_processors.site("fake_request")["SITE_URL"], "http://example.com")
 
-    @override_settings(TEMPLATE_CONTEXT_PROCESSORS=('noodles.context_processors.noodle_processors', ))
+    NOODLES_PROCESSOR_TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+            ],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'noodles.context_processors.noodle_processors'
+                ],
+            },
+        },
+    ]
+
+    @override_settings(TEMPLATES=NOODLES_PROCESSOR_TEMPLATES)
     def test_all_noodles(self):
         """
         Test the processor that adds all processors
@@ -428,6 +442,7 @@ class ActiveTogglerTestCase(TestCase):
     """
     Tests for the ActiveToggler abstract model
     """
+
     def setUp(self):
         """
         Set some things up
@@ -459,6 +474,7 @@ class LittleSluggerTestCase(TestCase):
     """
     Tests for the LittleSlugger abstract test case
     """
+
     def test_bad_slug_target(self):
         """
         Test poor (or lacking) get_slug_target implementations
@@ -505,6 +521,7 @@ class NameSlugTestCase(TestCase):
     """
     Tests relating to NameSlug abstract model
     """
+
     def test_name_slug_properties(self):
         """
         Test the properties setup for NameSlug
@@ -531,6 +548,7 @@ class TitleDateSlugTestCase(TestCase):
     """
     Tests for the TitleDateSlug abstract model
     """
+
     def setUp(self):
         """
         Set some stuff up for the tests

@@ -6,13 +6,12 @@ import django
 from django.conf import settings
 from django.test.utils import get_runner
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 if not settings.configured:
     settings.configure(
-        BASE_DIR = BASE_DIR,
+        BASE_DIR=BASE_DIR,
         DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
@@ -38,6 +37,7 @@ def runtests():
     test_runner = TestRunner()
     failures = test_runner.run_tests(["noodles_tests"])
     sys.exit(bool(failures))
+
 
 if __name__ == '__main__':
     runtests(*sys.argv[1:])
