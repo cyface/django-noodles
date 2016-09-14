@@ -14,9 +14,8 @@
 .tox
 coverage.xml
 nosetests.xml
-settings.py
+#settings.py
 .project
-.pydevproject
 env/
 _tmp.png
 .idea

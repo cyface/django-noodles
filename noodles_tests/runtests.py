@@ -12,6 +12,7 @@ sys.path.insert(0, BASE_DIR)
 if not settings.configured:
     settings.configure(
         BASE_DIR=BASE_DIR,
+        MIDDLEWARE_CLASSES=(),
         DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',

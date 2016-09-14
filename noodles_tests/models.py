@@ -8,7 +8,7 @@ from noodles.models import TitleDateSlug, ActiveToggler, LittleSlugger, NameSlug
 
 class DefinedWidthAssetsConcrete(DefinedWidthsAssetsFromImagesMixin, models.Model):
     """
-    Implenetation with an image field
+    Implementation with an image field
     """
     some_image = models.ImageField(upload_to="images", null=True, blank=True)
 
@@ -18,7 +18,7 @@ class DefinedWidthAssetsConcrete(DefinedWidthsAssetsFromImagesMixin, models.Mode
 
 class HalfQuarterAssetsConcrete(HalfQuarterAssetsMixin, models.Model):
     """
-    Implenetation with an image field
+    Implementation with an image field
     """
     some_image = models.ImageField(upload_to="images", null=True, blank=True)
 
@@ -32,7 +32,7 @@ class NameSlugConcrete(NameSlug):
 
 class BadLittleSluggerConcrete(LittleSlugger):
     """
-    No implemetation
+    No Implementation
     """
     pass
 
